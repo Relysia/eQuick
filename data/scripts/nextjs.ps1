@@ -31,7 +31,7 @@ Do {
 } 
 Until(!(Test-Path $RandomCommitName))
 New-Item "$RandomCommitName.ps1" -Type File
-Set-Content "$RandomCommitName.ps1" "cd $ProjectName
+Set-Content "$RandomCommitName.ps1" "Set-Location $ProjectName
 git add .
 `$CommitMessage = Read-Host -Prompt `"$ProjectName Commit Message`" 
 git commit -m `"`$CommitMessage`""
@@ -41,8 +41,23 @@ Do {
 } 
 Until(!(Test-Path $RandomPushName))
 New-Item "$RandomPushName.ps1" -Type File
-Set-Content "$RandomPushName.ps1" "cd $ProjectName
+Set-Content "$RandomPushName.ps1" "Set-Location $ProjectName
 git push"
+
+Do { 
+  $RandomDeleteName = [System.IO.Path]::GetRandomFileName()    
+} 
+Until(!(Test-Path $RandomDeleteName))
+New-Item "$RandomDeleteName.ps1" -Type File
+Set-Content "$RandomDeleteName.ps1" "gh repo delete $GithubRepoName
+Remove-Item -LiteralPath `"$ProjectName`" -Force -Recurse
+`$object = `"$ProjectName`"
+`$jsonfile = './data/intraLaunch.json'
+`$json = Get-Content `$jsonfile -Raw | ConvertFrom-Json
+`$json.nextjs = `$json.nextjs | Select-Object * | Where-Object { `$_.name -ne `$object }
+`$json | ConvertTo-Json | Out-File -Encoding ASCII `$jsonfile
+Set-Location ./data/scripts
+Remove-Item -LiteralPath `"$ProjectName`" -Force -Recurse"
 
 $Current = (Get-Item .).FullName
 $GitLocation = $Current -replace '\\', '/'
@@ -54,7 +69,8 @@ $newblock = @"
   {
     "name": "$ProjectName",
     "commit": "$GitLocation/$RandomCommitName.ps1",
-    "push": "$GitLocation/$RandomPushName.ps1"
+    "push": "$GitLocation/$RandomPushName.ps1",
+    "delete": "$GitLocation/$RandomDeleteName.ps1"
   }
 "@
 

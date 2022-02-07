@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.sass';
 import intraLaunch from '../intraLaunch.json';
@@ -31,7 +30,7 @@ export default function Home() {
         </a>
       </div>
       <div className={styles['project-flex']}>
-        {intraLaunch.nextjs.map((elem, i) => (
+        {intraLaunch.nextjs.slice(2).map((elem, i) => (
           <div key={i} className={styles['project-container']}>
             <div className={styles['project-link']}>
               <img className={styles['project-icon']} src='nextjs.svg' alt='Next ' />

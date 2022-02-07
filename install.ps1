@@ -27,5 +27,12 @@ Set-Content "intraLaunch.json" "{
     `"title`": `"$WorkSpace`",
     `"projectLocation`": `"$ProjectLocation`"
   },
-  `"nextjs`": []
+  `"nextjs`": [
+    {
+      `"array`": `"array`"
+    },
+    {
+      `"default`": `"default`"
+    }
+  ]
 }"
