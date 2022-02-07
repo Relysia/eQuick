@@ -11,9 +11,12 @@ createNextProject
 $GithubRepoName = Read-Host -Prompt "What is the name of your GitHub repo you want to create?"
 Write-Output "Creating GitHub repo: $GithubRepoName ..."
 Function createGithubRepo () {
+  git init
+  git add .
+  git commit -m "Initial commit"
   gh repo create $GithubRepoName --public --source=. --remote=upstream
-  git remote add origin "git@github.com:Relysia/$GithubRepoName"
-  git push -u origin main
+  git remote add origin git@github.com:Relysia/$GithubRepoName
+  git push --set-upstream origin main
 } 
 
 createGithubRepo
