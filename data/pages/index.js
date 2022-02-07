@@ -45,7 +45,7 @@ export default function Home() {
                   <img className={styles['git-icon']} src='push.webp' alt='Git Push' />
                 </a>
                 <a href='#' className={styles['git-link']} onClick={() => launchScript('run', elem.delete, intraLaunch.initial.projectLocation)}>
-                  <img className={styles['git-icon']} src='push.webp' alt='Git Push' />
+                  <img className={styles['git-icon']} src='delete.png' alt='Git Push' />
                 </a>
               </div>
             )}
