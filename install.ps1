@@ -10,7 +10,7 @@ Set-Content "liveserver.ps1" "Set-Location $WORKDIR\data
 npm run dev"
 
 $ComObj = New-Object -ComObject WScript.Shell
-$ShortCut = $ComObj.CreateShortcut("$Env:USERPROFILE\desktop\eQuick.lnk")
+$ShortCut = $ComObj.CreateShortcut("$Env:USERPROFILE\desktop\$WorkSpace.lnk")
 $ShortCut.TargetPath = "$WORKDIR\data\scripts\liveserver.ps1"
 $ShortCut.Description = "Open eQuick in Chrome"
 $ShortCut.WindowStyle = 1
