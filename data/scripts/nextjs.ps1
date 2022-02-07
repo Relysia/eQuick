@@ -47,7 +47,7 @@ git push"
 $Current = (Get-Item .).FullName
 $GitLocation = $Current -replace '\\', '/'
 
-$jsonfile = '../intraLaunch.json'
+$jsonfile = '../../intraLaunch.json'
 $json = Get-Content $jsonfile | Out-String | ConvertFrom-Json
 
 $newblock = @"
