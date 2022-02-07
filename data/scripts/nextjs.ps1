@@ -12,7 +12,7 @@ $GithubRepoName = Read-Host -Prompt "What is the name of your GitHub repo you wa
 Write-Output "Creating GitHub repo: $GithubRepoName ..."
 Function createGithubRepo () {
   gh repo create $GithubRepoName --public --source=. --remote=upstream
-  git remote add origin git@github.com:Relysia/$GithubRepoName
+  git remote add origin "git@github.com:Relysia/$GithubRepoName"
   git push -u origin main
 } 
 
