@@ -4,7 +4,10 @@ Write-Output "Creating new eQuick workspace: $WorkSpace ..."
 $WORKDIR = (Get-Item .).FullName
 $ProjectLocation = $WORKDIR -replace '\\', '/'
 
-Set-Location ./data/scripts
+Set-Location ./data
+npm install
+
+Set-Location ./scripts
 New-Item "liveserver.ps1" -Type File
 Set-Content "liveserver.ps1" "Set-Location $WORKDIR\data
 npm run dev"
