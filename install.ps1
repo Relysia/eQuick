@@ -10,6 +10,7 @@ npm install
 Set-Location ./scripts
 New-Item "liveserver.ps1" -Type File
 Set-Content "liveserver.ps1" "Set-Location $WORKDIR\data
+Write-Output 'Please copy the url to your Google Chrome browser!'
 npm run dev"
 
 $ComObj = New-Object -ComObject WScript.Shell
@@ -29,10 +30,13 @@ Set-Content "intraLaunch.json" "{
   },
   `"nextjs`": [
     {
-      `"array`": `"array`"
+      `"default`": `"default`"
     },
     {
       `"default`": `"default`"
     }
   ]
 }"
+
+Write-Output 'Your workspace has been created!'
+Start-Sleep 2

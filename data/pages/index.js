@@ -32,7 +32,7 @@ export default function Home() {
       <div className={styles['project-flex']}>
         {intraLaunch.nextjs.slice(2).map((elem, i) => (
           <div key={i} className={styles['project-container']}>
-            <div className={styles['project-link']}>
+            <div className={styles['project-link']} onClick={() => launchScript('run', elem.start, intraLaunch.initial.projectLocation)}>
               <img className={styles['project-icon']} src='nextjs.svg' alt='Next ' />
               {elem.name}
             </div>

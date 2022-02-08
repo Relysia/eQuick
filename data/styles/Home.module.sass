@@ -35,11 +35,14 @@
   flex-direction: column
   justify-content: center
   align-items: center
-  gap: 15px
+  gap: 10px
   font-size: 1.3rem
   text-decoration: none
   color: #fff
   transition: .2s
+  cursor: pointer
+  &:hover
+    filter: brightness(.6)
 
 .project-icon
   width: 120px
@@ -55,9 +58,8 @@
   height: 50px
   filter: invert(1)
   transition: .2s
-
-.git-icon:hover
-  filter: invert(1) brightness(.6)
+  &:hover
+    filter: invert(1) brightness(.6)
 
 .logo-container
   display: flex
