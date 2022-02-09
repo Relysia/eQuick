@@ -106,7 +106,7 @@ Function createGithubRepo () {
   git add .
   git commit -m "Initial commit"
   gh repo create $ProjectName --public --source=. --remote=upstream
-  git remote add origin git@github.com:$DockerUsername/$ProjectName
+  git remote add origin git@github.com:$GitUsername/$ProjectName
   git push --set-upstream origin main
 } 
 
@@ -154,8 +154,8 @@ Do {
 } 
 Until(!(Test-Path $RandomDeleteScript))
 New-Item "$RandomDeleteScript.ps1" -Type File
-Set-Content "$RandomDeleteScript.ps1" "docker stop $ProjectName
-docker rmi -f `$(docker images | grep '$GitUsername/$ProjectName')"
+Set-Content "$RandomDeleteScript.ps1" "sudo docker stop $ProjectName
+sudo docker rmi -f `$(docker images | grep '$DockerUsername/$ProjectName')"
 
 Do { 
   $RandomDeleteName = [System.IO.Path]::GetRandomFileName()    
@@ -185,13 +185,12 @@ if (`$continue -eq 'Yes') {
   `$SecurePassword2 = Get-Content ./encdckr.txt | ConvertTo-SecureString -Key (1..16)
   `$BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(`$SecurePassword2)
   `$DockerPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR(`$BSTR)
-  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR(`$BSTR)
   plink -no-antispoof $SSHAddress -pw `$SSHPassword -m ./$RandomDeleteScript.ps1
   Write-Output 'Removing Script Folder...'
   Set-Location ../
   Remove-Item -LiteralPath `"$ProjectName`" -Force -Recurse
   Write-Output 'Removing DockerHub Repository...'
-  `$params = @{username = '$DockerUsername'; password = '`$DockerPassword' }
+  `$params = @{username = `"$DockerUsername`"; password = `"`$DockerPassword`" }
   `$response = Invoke-RestMethod -Uri https://hub.docker.com/v2/users/login/ -Method POST -Body `$params
   `$token = `$response.token;
   `$orgName = `"$DockerUsername`"
