@@ -36,16 +36,16 @@ export default function Home() {
               <img className={styles['project-icon']} src='nextjs.svg' alt='Next ' />
               {elem.name}
             </div>
-            {elem.commit && (
+            {elem.start && (
               <div className={styles['git-container']}>
-                <a href='#' className={styles['git-link']} onClick={() => launchScript('run', elem.commit, intraLaunch.initial.projectLocation)}>
-                  <img className={styles['git-icon']} src='gitcommit.png' alt='Git Commit ' />
-                </a>
                 <a href='#' className={styles['git-link']} onClick={() => launchScript('run', elem.push, intraLaunch.initial.projectLocation)}>
                   <img className={styles['git-icon']} src='push.webp' alt='Git Push' />
                 </a>
+                <a href='#' className={styles['git-link']} onClick={() => launchScript('run', elem.deploy, intraLaunch.initial.projectLocation)}>
+                  <img className={styles['git-icon']} src='deploy.png' alt='Deploy Project' />
+                </a>
                 <a href='#' className={styles['git-link']} onClick={() => launchScript('run', elem.delete, intraLaunch.initial.projectLocation)}>
-                  <img className={styles['git-icon']} src='delete.png' alt='Git Push' />
+                  <img className={styles['git-icon']} src='delete.png' alt='Delete Project' />
                 </a>
               </div>
             )}
